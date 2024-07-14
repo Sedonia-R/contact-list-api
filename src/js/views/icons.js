@@ -15,6 +15,12 @@ import faEnvelope from '@fortawesome/fontawesome-free-solid/faEnvelope';
 import faPencilAlt from '@fortawesome/fontawesome-free-solid/faPencilAlt';
 import faTrashAlt from '@fortawesome/fontawesome-free-solid/faTrashAlt';
 
+{/* <i class="fa-solid fa-location-pin"></i>
+<i class="fa-solid fa-phone"></i>
+<i class="fa-solid fa-envelope"></i>
+<i class="fa-solid fa-trash-can"></i>
+<i class="fa-solid fa-pencil"></i> */}
+
 /**
  * 3) Tell font-awesome that you want to replace your icons with SVGs (recomended for performance)
 */
