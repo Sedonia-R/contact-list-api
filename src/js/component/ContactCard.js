@@ -32,7 +32,7 @@ import React from 'react';
 
 /**
  * here is where you define the data-types for
- * your component propersties
+ * your component properties
 **/
 // ContactCard.propTypes = {
 //     history: PropTypes.object,
