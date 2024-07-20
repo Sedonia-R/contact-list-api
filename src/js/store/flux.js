@@ -1,23 +1,75 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			// my note: 
-
-			// demo: [
-			// 	{
-			// 		title: "FIRST",
-			// 		background: "white",
-			// 		initial: "white"
-			// 	},
-			// 	{
-			// 		title: "SECOND",
-			// 		background: "white",
-			// 		initial: "white"
-			// 	}
-			// ]
+			contacts: []
 		},
 		actions: {
-			// my note: 
+			getContacts: async () => {
+				const response = await fetch
+					('https://playground.4geeks.com/contact/agendas/Sedonia/contacts', {
+						method: 'GET'
+					})
+				const body = await response.json()
+				setStore({
+					contacts: body.contacts
+				})
+
+				// fetch('https://playground.4geeks.com/contact/agendas/Sedonia/contacts', {
+				// 	method: 'GET'
+				// })
+				// .then((response) => response.json())
+				// .then((body) => setStore({
+				// 	contacts: body.contacts
+				// }))
+				console.log('fetched user contacts')
+			},
+
+			removeContact: (contact_id) => {
+				fetch(
+					`https://playground.4geeks.com/contact/agendas/Sedonia/contacts/${contact_id}`, {
+						method: "DELETE",
+					})
+				// delete function goes here
+				getContacts()
+				console.log('deleted contact')
+			},
+
+			createContact: (name, email, phone, address) => {
+				const { getContacts } = getActions();
+				return fetch('https://playground.4geeks.com/contact/agendas/Sedonia/contacts', {
+					method: 'POST',
+					headers: {
+					'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						"name": `${name}`,
+						"email": `${email}`,
+						"phone": `${phone}`,
+						"address": `${address}`,
+					}),
+				})
+				.then(response => response.json())
+				.then((body) => getContacts())
+				console.log('new contact created')
+			},
+
+			editContact: (name, email, phone, address, contact_id) => {
+				fetch(`https://playground.4geeks.com/contact/agendas/Sedonia/contacts/${contact_id}`, {
+					method: 'POST',
+					headers: {
+					'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						"name": `${name}`,
+						"email": `${email}`,
+						"phone": `${phone}`,
+						"address": `${address}`,
+					}),
+				})
+				.then(response => response.json())
+				getContacts()
+				console.log('contact updated')
+			}
 
 			// // Use getActions to call a function within a fuction
 			// exampleFunction: () => {
