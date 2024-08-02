@@ -2,7 +2,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			contacts: []
+			contacts: [],
+			current_contact: []
 		},
 		actions: {
 			getContacts: async () => {
@@ -57,9 +58,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"address": `${address}`,
 					}),
 				});
+			},
 
+			setCurrentContact: (contactToSet) => {
+				try {
+					for(let contact of getStore().contacts) {
+						if(contactToSet == contact){
+							setStore({
+								current_contact: contact
+							})
+							console.log("Hey, I grabbed the contact!")
+						}
+					}
+					console.log(getStore().contacts)
+				} catch (error) {
+					console.log("There was an error", error)
+				}
 			}
-
 		}
 	};
 };

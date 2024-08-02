@@ -32,7 +32,7 @@ export const AddContact = () => {
                             name="name"
                             className="form-control" 
                             placeholder="Full Name" 
-                            value={state.name}
+                            value={store.currentContact.name || state.name}
                             onChange={handleChange}
                         />
                     </div>
@@ -43,7 +43,7 @@ export const AddContact = () => {
                             name="email"
                             className="form-control" 
                             placeholder="Enter email" 
-                            value={state.email}
+                            value={store.currentContact.email || state.email}
                             onChange={handleChange}
                         />
                     </div>
@@ -54,7 +54,7 @@ export const AddContact = () => {
                             name="phone"
                             className="form-control" 
                             placeholder="Enter phone"
-                            value={state.phone}
+                            value={store.currentContact.phone || state.phone}
                             onChange={handleChange} 
                         />
                     </div>
@@ -65,7 +65,7 @@ export const AddContact = () => {
                             name="address"
                             className="form-control"
                             placeholder="Enter address"
-                            value={state.address}
+                            value={store.currentContact.address || state.address}
                             onChange={handleChange}
                             />
                     </div>
@@ -75,7 +75,7 @@ export const AddContact = () => {
                         className="btn btn-primary form-control"
                         onClick={
                             () => 
-                                // store.contacts.map(item => item.id).includes(contact.id) ?
+                                
                                     actions.createContact(
                                         state.name, 
                                         state.email, 

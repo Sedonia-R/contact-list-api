@@ -1,10 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, redirect } from "react-router-dom";
 import { ContactCard } from "../component/ContactCard";
 import { Context } from "../store/appContext";
 
 export const Contacts = ()=> {
     const { store, actions } = useContext(Context);
+
+    useEffect(() => {
+        actions.setCurrentContact([])
+    }, [])
 
     return (
         <div className="container">

@@ -5,6 +5,12 @@ import { Context } from '../store/appContext';
 export const ContactCard = ({contact}) => {
     const {store, actions} = useContext(Context);
     const navigate = useNavigate();
+    const handleClick = (contactToSetToCurrent) =>{
+        actions.setCurrentContact(contactToSetToCurrent);
+        console.log(contactToSetToCurrent, 'contactToSetVariable')
+        console.log(store.currentContact, 'store.current')
+        navigate("./add")
+    }
     
     return (
         <li className="list-group-item">
@@ -29,10 +35,10 @@ export const ContactCard = ({contact}) => {
                         <div className="col-3">
                             <button 
                                 className="btn" 
-                                onClick={
-                                    () => {
-                                        navigate("./add");
-                                    }}
+                                onClick={() => {
+                                    handleClick(contact);
+                                    navigate("./add")
+                                }}
                             >
                                 <i className="fas fa-pencil-alt mr-3"></i>
                             </button>
