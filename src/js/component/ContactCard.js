@@ -9,7 +9,6 @@ export const ContactCard = ({contact}) => {
         actions.setCurrentContact(contactToSetToCurrent);
         console.log(contactToSetToCurrent, 'contactToSetVariable')
         console.log(store.currentContact, 'store.current')
-        navigate("./add")
     }
     
     return (

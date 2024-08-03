@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			contacts: [],
-			current_contact: []
+			currentContact: []
 		},
 		actions: {
 			getContacts: async () => {
@@ -46,6 +46,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			editContact: async (name, email, phone, address, contact_id) => {
+				const { getContacts } = getActions();
 				const response = await fetch(`https://playground.4geeks.com/contact/agendas/Sedonia/contacts/${contact_id}`, {
 					method: 'PUT',
 					headers: {
@@ -58,14 +59,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"address": `${address}`,
 					}),
 				});
+				const body = await response.json();
+				console.log('contact updated')
+				setStore({
+					currentContact: []
+				})
+				return getContacts();
 			},
 
 			setCurrentContact: (contactToSet) => {
 				try {
 					for(let contact of getStore().contacts) {
-						if(contactToSet == contact){
+						if(contactToSet.id == contact.id){
 							setStore({
-								current_contact: contact
+								currentContact: contact
 							})
 							console.log("Hey, I grabbed the contact!")
 						}
@@ -74,7 +81,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log("There was an error", error)
 				}
-			}
+			},
 		}
 	};
 };

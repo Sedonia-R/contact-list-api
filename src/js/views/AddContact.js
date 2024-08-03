@@ -20,6 +20,25 @@ export const AddContact = () => {
         })
       }
 
+    const handleClick = () => {
+        if(store.currentContact.length == 0){ 
+            (actions.createContact(
+                state.name, 
+                state.email, 
+                state.phone, 
+                state.address
+            ).then(()=> navigate("/")))
+        } else {
+            (actions.editContact(
+                state.name || store.currentContact.name, 
+                state.email || store.currentContact.email, 
+                state.phone || store.currentContact.phone, 
+                state.address || store.currentContact.address,
+                store.currentContact.id
+            ).then(()=> navigate("/")))
+        }
+    }
+
     return (
         <div className="container">
             <div>
@@ -31,8 +50,8 @@ export const AddContact = () => {
                             type="text" 
                             name="name"
                             className="form-control" 
-                            placeholder="Full Name" 
-                            value={store.currentContact.name || state.name}
+                            placeholder={store.currentContact.name || "Full Name"}
+                            value={state.name}
                             onChange={handleChange}
                         />
                     </div>
@@ -42,8 +61,8 @@ export const AddContact = () => {
                             type="email" 
                             name="email"
                             className="form-control" 
-                            placeholder="Enter email" 
-                            value={store.currentContact.email || state.email}
+                            placeholder={store.currentContact.email || "Enter email"}
+                            value={state.email}
                             onChange={handleChange}
                         />
                     </div>
@@ -53,8 +72,8 @@ export const AddContact = () => {
                             type="phone" 
                             name="phone"
                             className="form-control" 
-                            placeholder="Enter phone"
-                            value={store.currentContact.phone || state.phone}
+                            placeholder={store.currentContact.phone || "Enter phone"}
+                            value={state.phone}
                             onChange={handleChange} 
                         />
                     </div>
@@ -64,8 +83,8 @@ export const AddContact = () => {
                             type="text" 
                             name="address"
                             className="form-control"
-                            placeholder="Enter address"
-                            value={store.currentContact.address || state.address}
+                            placeholder={store.currentContact.address || "Enter address"}
+                            value={state.address}
                             onChange={handleChange}
                             />
                     </div>
@@ -74,22 +93,7 @@ export const AddContact = () => {
                         type="button" 
                         className="btn btn-primary form-control"
                         onClick={
-                            () => 
-                                
-                                    actions.createContact(
-                                        state.name, 
-                                        state.email, 
-                                        state.phone, 
-                                        state.address
-                                    ).then(()=> navigate("/"))
-                                // :
-                                //     actions.editContact(
-                                //         state.name, 
-                                //         state.email, 
-                                //         state.phone, 
-                                //         state.address,
-                                //         contact.id
-                                //     ).then(()=> navigate("/"))
+                            () => {handleClick()}
                         }
                     >
                         save
